@@ -81,7 +81,6 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
         }
 
         
-        // Zamiast InvalidateRect mo¿esz wywo³aæ StretchDIBits tutaj bezpoœrednio.
         StretchDIBits(hdc,
             0, 0, buffer_width, buffer_height,
             0, 0, buffer_width, buffer_height,
