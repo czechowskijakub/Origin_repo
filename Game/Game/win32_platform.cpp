@@ -17,6 +17,7 @@ globalVariable RenderState renderState;
 #include "renderer.cpp"
 #include "game.cpp"
 
+
 LRESULT CALLBACK window_callback(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     LRESULT result = 0;
     switch (uMsg) {
@@ -106,14 +107,14 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 
 #define processButton(b, vk)\
 case vk: {\
+    input.buttons[b].changed = isDown != input.buttons[b].isDown;\
     input.buttons[b].isDown = isDown;\
-    input.buttons[b].changed = true;\
 } break;
                     switch (vkCode) {
                         processButton(BUTTON_UP, VK_UP);
                         processButton(BUTTON_DOWN, VK_DOWN);
-                        processButton(BUTTON_LEFT, VK_LEFT);
-                        processButton(BUTTON_RIGHT, VK_RIGHT);
+                        processButton(BUTTON_W, 'W');
+                        processButton(BUTTON_S, 'S');
                     }
                 } break;
                 
@@ -127,7 +128,7 @@ case vk: {\
         }
 
      
-        simulateGame(&input);
+        simulateGame(&input, deltaTime);
         
         StretchDIBits(hdc, 0, 0, renderState.width, renderState.height, 0, 0, renderState.width, renderState.height, renderState.memory, &renderState.bitmapInfo, DIB_RGB_COLORS, SRCCOPY);
 
@@ -138,3 +139,5 @@ case vk: {\
     }
 
 }
+
+
